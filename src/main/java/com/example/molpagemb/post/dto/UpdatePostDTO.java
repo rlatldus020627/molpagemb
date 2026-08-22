@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class UpdatePostDTO {
-
 	private String postTitle;
 	private String postContent;
 }
