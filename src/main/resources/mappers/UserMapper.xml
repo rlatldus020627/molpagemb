@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.molpagemb.user.repository.UserMapper">
+		<resultMap id="com.example.molpagemb.user.dto.UserDTO" type="userResultMap">
+		<result column="USER_ID_NUMBER" property="userIdNumber"/>
+		<result column="USER_ID" property="userId"/>
+		<result column="USER_ROLE" property="userRole"/>
+		<result column="USER_PASSWORD" property="userPassword"/>
+		<result column="USER_CREATED_AT" property="userCreatedAt"/>
+	</resultMap>
+	<sql id="userSQL">
+		SELECT USER_ID_NUMBER, 
+				USER_ID,
+				USER_ROLE,
+				USER_PASSWORD,
+				USER_CREATED_AT
+		FROM USERS
+	</sql>
+	<select id="findAllUsers" resultType="com.example.molpagemb.user.dto.UserDTO">
+		<include refid="userSQL" />
+	</select>
+	<select id="findAllUsersByUserRole" resultType="com.example.molpagemb.user.dto.UserDTO">
+		<include refid="userSQL" />
+		WHERE USER_ROLE = #{userRole}
+	</select>
+	<select id="findUserByUserId" parameterType="String" resultType="com.example.molpagemb.user.dto.UserDTO">
+		<include refid="userSQL" />
+		WHERE USER_ID = #{userId}
+	</select>
+	<select id="findUserByUserIdNumber" parameterType="Long" resultType="com.example.molpagemb.user.dto.UserDTO">
+		<include refid="userSQL" />
+		WHERE USER_ID_NUMBER = #{userIdNumber}
+	</select>
+	
+	<select id="existsByUserId" parameterType="string"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM USERS
+		WHERE USER_ID = #{userId}
+	</select>
+	<insert id="createUser" parameterMap="com.example.molpagemb.user.dto.CreateUserDTO">
+		INSERT INTO USERS (
+							USER_ID,
+							USER_PASSWORD 
+							) 
+					VALUES (
+							#{userId},
+							#{userPassword}
+							)
+	</insert>
+</mapper>

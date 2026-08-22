@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.molpagemb.post.repository.PostMapper">
+  <resultMap type="com.example.molpagemb.post.dto.PostDTO" id="postResultMap">
+  <result column="POST_ID" property="postId"/>
+  <result column="POST_BOARD_ID" property="postBoardId"/>
+  <result column="POST_USER_ID_NUMBER" property="postUserIdNumber"/>
+  <result column="POST_TITLE" property="postTitle"/>
+  <result column="POST_CONTENT" property="postContent"/>
+  <result column="POST_CREATED_AT" property="postCreatedAt"/>
+  </resultMap>
+  <sql id="postSQL">
+  	SELECT 
+  		POST_ID, 
+  		POST_BOARD_ID, 
+  		POST_USER_ID_NUMBER, 
+  		POST_TITLE, 
+  		POST_CONTENT, 
+  		POST_CREATED_AT 
+	FROM POSTS
+  </sql>
+  <select id="findAllPosts">
+  	<include refid="postSQL"/>
+  </select>
+  <select id="findAllPostsByBoardId">
+  	<include refid="postSQL"/>
+  	WHERE BOARD_ID = #{boardId}
+  </select>
+  <select id="findAllPostsByUserIdNumber">
+  	<include refid="postSQL"/>
+  	WHERE USER_ID_NUMBER = #{userIdNumber}
+  </select>
+  <select id="findPostByPostId">
+  	<include refid="postSQL"/>
+  	WHERE POST_ID = #{postId}
+  </select>
+  </mapper>
