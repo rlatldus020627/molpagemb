@@ -27,7 +27,7 @@
 		<include refid="commentSQL" />
 		WHERE COMMENT_USER_ID_NUMBER = #{userIdNumber}
 	</select>
-	<select id="findAllCommentsByUserIdNumber" resultMap="com.example.molpagemb.comment.dto.commentDTO">
+	<select id="findAllCommentsByCommentId" resultMap="com.example.molpagemb.comment.dto.commentDTO">
 		<include refid="commentSQL" />
 		WHERE COMMENT_ID = #{commentId}
 	</select>

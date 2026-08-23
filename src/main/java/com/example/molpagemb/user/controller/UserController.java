@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/qwert")
+@RequestMapping("/qwert/user")
 public class UserController {
 	private final UserService userService;
 	private final CookieHelper cookieHelper;
@@ -42,7 +42,7 @@ public class UserController {
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("set-cookie", cookieHelper.makeJwtCookie(token));
-		return null;
+		return ResponseEntity.ok().headers(httpHeaders).body(JwtTokenDTO.builder().token(token).build());
 	}
 	
 	@PostMapping("/sign-out")
