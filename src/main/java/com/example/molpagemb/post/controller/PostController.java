@@ -25,18 +25,18 @@ public class PostController {
 	}
 	
 	@GetMapping("/find-all-posts-by-board-id")
-	public ResponseEntity<List<PostDTO>> findAllPostsByBoardId(){
-		return ResponseEntity.ok(postService.findAllPostsByBoardId());
+	public ResponseEntity<List<PostDTO>> findAllPostsByBoardId(Long boardId){
+		return ResponseEntity.ok(postService.findAllPostsByBoardId(boardId));
 		
 	}
 
 	@GetMapping("/find-all-posts-by-user-id-number")
-	public ResponseEntity<List<PostDTO>> findAllPostsByUserIdNumber(){
-		return ResponseEntity.ok(postService.findAllPostsByUserIdNumber());
+	public ResponseEntity<List<PostDTO>> findAllPostsByUserIdNumber(Long userIdNumber){
+		return ResponseEntity.ok(postService.findAllPostsByUserIdNumber(userIdNumber));
 	}
 	
 	@GetMapping("/find-post-by-post-id")
-	public ResponseEntity<PostDTO> findPostByPostId(){
-		return ResponseEntity.ok(postService.findPostByPostId());
+	public ResponseEntity<PostDTO> findPostByPostId(Long postId){
+		return ResponseEntity.ok(postService.findPostByPostId(postId));
 	}
 }

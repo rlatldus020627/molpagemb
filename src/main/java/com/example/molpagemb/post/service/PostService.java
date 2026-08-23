@@ -7,9 +7,9 @@ import com.example.molpagemb.post.dto.PostDTO;
 
 public interface PostService {
 	List<PostDTO> findAllPosts();
-	List<PostDTO> findAllPostsByBoardId();
-	List<PostDTO> findAllPostsByUserIdNumber();
-	PostDTO findPostByPostId();
+	List<PostDTO> findAllPostsByBoardId(Long boardId);
+	List<PostDTO> findAllPostsByUserIdNumber(Long userIdNumber);
+	PostDTO findPostByPostId(Long postId);
 	void createPost(CreatePostDTO createPostDTO);
 
 }

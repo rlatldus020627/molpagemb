@@ -2,6 +2,7 @@ package com.example.molpagemb.post.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.molpagemb.post.dto.CreatePostDTO;
@@ -25,19 +26,18 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public List<PostDTO> findAllPostsByBoardId() {
-		return postMapper.findAllPostsByBoardId();
+	public List<PostDTO> findAllPostsByBoardId(Long boardId) {
+		return postMapper.findAllPostsByBoardId(boardId);
 	}
 
 	@Override
-	public List<PostDTO> findAllPostsByUserIdNumber() {
-		return postMapper.findAllPostsByUserIdNumber();
+	public List<PostDTO> findAllPostsByUserIdNumber(Long userIdNumber) {
+		return postMapper.findAllPostsByUserIdNumber(userIdNumber);
 	}
 
 	@Override
-	public PostDTO findPostByPostId() {
-		// TODO Auto-generated method stub
-		return null;
+	public PostDTO findPostByPostId(Long postId) {
+		return postMapper.findPostByPostId(postId);
 	}
 
 	@Override
