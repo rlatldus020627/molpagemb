@@ -23,8 +23,6 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
-	private final CreateUserDTO createUserDTO;
-	private final UserDTO userDTO;
 	private final JwtTokenProvider jwtTokenProvider;
 	private final UserMapper userMapper;
 	private final ErrorMessagePropertySource errorMessagePropertySource;
