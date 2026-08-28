@@ -36,4 +36,14 @@
   	<include refid="postSQL"/>
   	WHERE POST_ID = #{postId}
   </select>
+  <insert id="savePost">
+  	INSERT INTO POSTS (POST_BOARD_ID, POST_USER_ID_NUMBER, POST_TITLE, POST_CONTENT, POST_CREATED_AT)
+	VALUES (
+		1,
+		1,
+		'TITLE7',
+		'CONTENT7',
+		SYSDATE
+			);
+  </insert>
   </mapper>
