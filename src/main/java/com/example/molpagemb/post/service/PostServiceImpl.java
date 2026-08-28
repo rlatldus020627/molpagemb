@@ -41,9 +41,10 @@ public class PostServiceImpl implements PostService{
 	}
 
 	@Override
-	public void createPost(CreatePostDTO createPostDTO) {
-		// TODO Auto-generated method stub
-		
+	public void createPost(Long postBoardId, Long userIdNumber, CreatePostDTO createPostDTO) {
+		createPostDTO.setPostBoardId(postBoardId);
+		createPostDTO.setPostUserIdNumber(userIdNumber);
+		postMapper.savePost(createPostDTO);
 	}
 
 }

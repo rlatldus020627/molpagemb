@@ -10,6 +10,6 @@ public interface PostService {
 	List<PostDTO> findAllPostsByBoardId(Long boardId);
 	List<PostDTO> findAllPostsByUserIdNumber(Long userIdNumber);
 	PostDTO findPostByPostId(Long postId);
-	void createPost(CreatePostDTO createPostDTO);
+	void createPost(Long postBoardId, Long userIdNumber, CreatePostDTO createPostDTO);
 
 }

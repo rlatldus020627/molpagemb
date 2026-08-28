@@ -4,6 +4,9 @@ import lombok.Data;
 
 @Data
 public class CreatePostDTO {
+	private Long postId;
+	private Long postUserIdNumber;
+	private Long postBoardId;
 	private String postTitle;
 	private String postContent;
 	

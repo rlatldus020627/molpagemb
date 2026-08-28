@@ -16,7 +16,7 @@ public interface PostMapper {
 	
 	PostDTO findPostByPostId(Long postId); //선택한 게시글ID의 게시글 하나 조회
 	
-	void createPost(CreatePostDTO createPostDTO); //게시글 작성
+	void savePost(CreatePostDTO createPostDTO); //게시글 작성
 	
 	
 }

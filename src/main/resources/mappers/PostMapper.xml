@@ -18,9 +18,11 @@
   		POST_CONTENT, 
   		POST_CREATED_AT 
 	FROM POSTS
+	ORDER BY POST_ID DESC
   </sql>
   <select id="findAllPosts">
   	<include refid="postSQL"/>
+  	
   </select>
   <select id="findAllPostsByBoardId">
   	<include refid="postSQL"/>

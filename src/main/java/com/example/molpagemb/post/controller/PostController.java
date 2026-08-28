@@ -1,12 +1,18 @@
 package com.example.molpagemb.post.controller;
 
+import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.molpagemb.post.dto.CreatePostDTO;
 import com.example.molpagemb.post.dto.PostDTO;
 import com.example.molpagemb.post.service.PostService;
 
@@ -38,5 +44,18 @@ public class PostController {
 	@GetMapping("/find-post-by-post-id")
 	public ResponseEntity<PostDTO> findPostByPostId(Long postId){
 		return ResponseEntity.ok(postService.findPostByPostId(postId));
+	}
+	
+	@PostMapping("/post/{postBoardId}")
+	public ResponseEntity<Map<String, Long>> createPost(@PathVariable("postBoardId") Long postBoardId, Principal principal, @RequestBody CreatePostDTO createPostDTO){
+		Long userId = (principal != null) ? Long.valueOf(principal.getName()) : createPostDTO.getPostUserIdNumber();
+		postService.createPost(postBoardId, userId, createPostDTO);
+		if (createPostDTO.getPostId() == null) {
+			return ResponseEntity.internalServerError().build();
+		}
+		return ResponseEntity
+				.status(201)
+				.body(Map.of("postId", createPostDTO.getPostId()));
+		
 	}
 }
