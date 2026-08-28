@@ -13,10 +13,10 @@
 				BOARD_CREATED_AT 
 		FROM BOARDS
 	</sql>
-	<select id="findAllBoards">
+	<select id="findAllBoards" resultMap="boardResultMap">
 		<include refid="boardSQL"/>
 	</select>
-	<select id="findBoardByBoardId">
+	<select id="findBoardByBoardId" resultMap="boardResultMap">
 		<include refid="boardSQL"/>
 		WHERE BOARD_ID LIKE #{boardId}
 	</select>

@@ -16,18 +16,18 @@
 				COMMENT_CREATED_AT 
 		FROM COMMENTS
 	</sql>
-	<select id="findAllComments" resultMap="com.example.molpagemb.comment.dto.commentDTO">
+	<select id="findAllComments" resultMap="commentResultMap">
 		<include refid="commentSQL" />
 	</select>
-	<select id="findAllCommentsByPostId" resultMap="com.example.molpagemb.comment.dto.commentDTO">
+	<select id="findAllCommentsByPostId" resultMap="commentResultMap">
 		<include refid="commentSQL" />
 		WHERE COMMENT_POST_ID = #{postId}
 	</select>
-	<select id="findAllCommentsByUserIdNumber" resultMap="com.example.molpagemb.comment.dto.commentDTO">
+	<select id="findAllCommentsByUserIdNumber" resultMap="commentResultMap">
 		<include refid="commentSQL" />
 		WHERE COMMENT_USER_ID_NUMBER = #{userIdNumber}
 	</select>
-	<select id="findAllCommentsByCommentId" resultMap="com.example.molpagemb.comment.dto.commentDTO">
+	<select id="findAllCommentsByCommentId" resultMap="commentResultMap">
 		<include refid="commentSQL" />
 		WHERE COMMENT_ID = #{commentId}
 	</select>

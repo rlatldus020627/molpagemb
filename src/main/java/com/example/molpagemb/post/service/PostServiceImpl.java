@@ -16,9 +16,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService{
 	private final PostMapper postMapper;
-	private final PostDTO postDTO;
-	private final CreatePostDTO createPostDTO;
-	private final UpdatePostDTO updatePostDTO;
 	
 	@Override
 	public List<PostDTO> findAllPosts() {
