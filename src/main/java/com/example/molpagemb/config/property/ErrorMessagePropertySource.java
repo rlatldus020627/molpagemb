@@ -13,7 +13,7 @@ public class ErrorMessagePropertySource {
 	@Value("${error.message.alreadyExistedUser}")
 	private String alreadyExistedUser;
 
-	@Value("${error.message.BadCredential}")
+	@Value("${error.message.BadCredentials}")
 	private String BadBadCredentials;
 	
 	@Value("${error.message.UserNotFound}")

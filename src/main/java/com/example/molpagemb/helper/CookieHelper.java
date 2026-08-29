@@ -2,11 +2,13 @@ package com.example.molpagemb.helper;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
+import org.springframework.stereotype.Component;
 
 import com.example.molpagemb.config.property.JwtPropertySource;
 
 import lombok.RequiredArgsConstructor;
 
+@Component
 @RequiredArgsConstructor
 public class CookieHelper { //쿠키 생성
 	private final JwtPropertySource jwtPropertySource;
