@@ -18,6 +18,6 @@
 	</select>
 	<select id="findBoardByBoardId" resultMap="boardResultMap">
 		<include refid="boardSQL"/>
-		WHERE BOARD_ID LIKE #{boardId}
+		WHERE BOARD_ID = #{boardId}
 	</select>
 </mapper>
