@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/qwert/post")
+@RequestMapping("/qwert/posts")
 public class PostController {
 	private final PostService postService;
 	
