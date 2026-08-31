@@ -38,14 +38,15 @@
 		FROM USERS
 		WHERE USER_ID = #{userId}
 	</select>
-	<insert id="createUser" parameterMap="com.example.molpagemb.user.dto.CreateUserDTO">
+	<insert id="createUser" parameterType="com.example.molpagemb.user.dto.CreateUserDTO">
 		INSERT INTO USERS (
 							USER_ID,
-							USER_PASSWORD 
+							USER_PASSWORD
 							) 
 					VALUES (
 							#{userId},
 							#{userPassword}
 							)
 	</insert>
+	
 </mapper>

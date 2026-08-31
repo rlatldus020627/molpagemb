@@ -3,13 +3,16 @@ package com.example.molpagemb.user.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.example.molpagemb.common.enums.UserRole;
 import com.example.molpagemb.user.dto.CreateUserDTO;
 import com.example.molpagemb.user.dto.SignInUserDTO;
 import com.example.molpagemb.user.dto.UserDTO;
 
 public interface UserService {
 	List<UserDTO> findAllUsers();
-	List<UserDTO> findAllUsersByUserRole();
+	List<UserDTO> findAllUsersByUserRole(@Param("userRole") UserRole userRole);
 	UserDTO findUserByUserId(String userId);
 	UserDTO findUserByUserIdNumber(Long userIdNumber);
 	

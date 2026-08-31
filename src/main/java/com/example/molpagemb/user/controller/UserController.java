@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.molpagemb.common.enums.UserRole;
 import com.example.molpagemb.config.jwt.JwtTokenDTO;
 import com.example.molpagemb.helper.CookieHelper;
 import com.example.molpagemb.user.dto.CreateUserDTO;
@@ -23,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/qwert/user")
+@RequestMapping("/qwert/users")
 public class UserController {
 	private final UserService userService;
 	private final CookieHelper cookieHelper;
@@ -58,8 +59,8 @@ public class UserController {
 	}
 	
 	@GetMapping("/find-all-users-by-user-role")
-	public ResponseEntity<List<UserDTO>> findAllUsersByUserRole(){
-		return ResponseEntity.ok(userService.findAllUsersByUserRole());
+	public ResponseEntity<List<UserDTO>> findAllUsersByUserRole(UserRole userRole){
+		return ResponseEntity.ok(userService.findAllUsersByUserRole(userRole));
 	}
 	
 	@GetMapping("/find-user-by-user-id-number")

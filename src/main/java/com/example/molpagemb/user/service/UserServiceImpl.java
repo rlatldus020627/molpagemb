@@ -3,12 +3,16 @@ package com.example.molpagemb.user.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.molpagemb.common.enums.UserRole;
 import com.example.molpagemb.config.exception.AlreadyExistedUserException;
 import com.example.molpagemb.config.jwt.JwtTokenProvider;
 import com.example.molpagemb.config.property.ErrorMessagePropertySource;
@@ -25,8 +29,9 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService{
 	private final JwtTokenProvider jwtTokenProvider;
 	private final UserMapper userMapper;
+	private final PasswordEncoder passwordEncoder;
 	private final ErrorMessagePropertySource errorMessagePropertySource;
-	
+	private final UserDTO userDTO;
 	private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
 	@Override
@@ -35,8 +40,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<UserDTO> findAllUsersByUserRole() {
-		return userMapper.findAllUsersByUserRole();
+	public List<UserDTO> findAllUsersByUserRole(UserRole userRole) {
+		return userMapper.findAllUsersByUserRole(userRole);
 	}
 
 	@Override
@@ -54,12 +59,12 @@ public class UserServiceImpl implements UserService{
 		
 		try {
 			UsernamePasswordAuthenticationToken authenticationToken =
-					new UsernamePasswordAuthenticationToken(signInUserDTO.getUserId(),signInUserDTO.getUserPassword());
+					new UsernamePasswordAuthenticationToken(userDTO.getUserId(), userDTO.getUserPassword());
 			
 			Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 			return jwtTokenProvider.createToken(authentication);
 					
-		}catch(Exception ex) {
+		}catch(AuthenticationException ex) {
 			throw new BadCredentialsException(errorMessagePropertySource.getBadBadCredentials());
 			
 		}
@@ -72,8 +77,7 @@ public class UserServiceImpl implements UserService{
 		if(user != null) {
 			throw new AlreadyExistedUserException(errorMessagePropertySource.getAlreadyExistedUser());
 		}
-//			createUserDTO.setPassword(passwordEncoder.encode(createUserDTO.getPassword()));
-		//TODO:패스워드인코더
+		createUserDTO.setUserPassword(passwordEncoder.encode(createUserDTO.getUserPassword()));
 		userMapper.createUser(createUserDTO);
 		
 	}
