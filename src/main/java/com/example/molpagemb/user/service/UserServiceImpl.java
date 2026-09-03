@@ -3,7 +3,6 @@ package com.example.molpagemb.user.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -31,7 +30,6 @@ public class UserServiceImpl implements UserService{
 	private final UserMapper userMapper;
 	private final PasswordEncoder passwordEncoder;
 	private final ErrorMessagePropertySource errorMessagePropertySource;
-	private final UserDTO userDTO;
 	private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
 	@Override
@@ -59,7 +57,7 @@ public class UserServiceImpl implements UserService{
 		
 		try {
 			UsernamePasswordAuthenticationToken authenticationToken =
-					new UsernamePasswordAuthenticationToken(userDTO.getUserId(), userDTO.getUserPassword());
+					new UsernamePasswordAuthenticationToken(signInUserDTO.getUserId(), signInUserDTO.getUserPassword());
 			
 			Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 			return jwtTokenProvider.createToken(authentication);

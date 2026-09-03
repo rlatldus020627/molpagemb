@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,25 +31,25 @@ public class PostController {
 		
 	}
 	
-	@GetMapping("/find-all-posts-by-board-id")
-	public ResponseEntity<List<PostDTO>> findAllPostsByBoardId(Long boardId){
+	@GetMapping("/find-all-posts-by-board-id/{postBoardId}")
+	public ResponseEntity<List<PostDTO>> findAllPostsByBoardId(@PathVariable("postBoardId") Long boardId){
 		return ResponseEntity.ok(postService.findAllPostsByBoardId(boardId));
 		
 	}
 
-	@GetMapping("/find-all-posts-by-user-id-number")
-	public ResponseEntity<List<PostDTO>> findAllPostsByUserIdNumber(Long userIdNumber){
+	@GetMapping("/find-all-posts-by-user-id-number/{userIdNumber}")
+	public ResponseEntity<List<PostDTO>> findAllPostsByUserIdNumber(@PathVariable("userIdNumber") Long userIdNumber){
 		return ResponseEntity.ok(postService.findAllPostsByUserIdNumber(userIdNumber));
 	}
 	
-	@GetMapping("/find-post-by-post-id")
-	public ResponseEntity<PostDTO> findPostByPostId(Long postId){
+	@GetMapping("/find-post-by-post-id/{postId}")
+	public ResponseEntity<PostDTO> findPostByPostId(@PathVariable("postId") Long postId){
 		return ResponseEntity.ok(postService.findPostByPostId(postId));
 	}
 	
 	@PostMapping("/post/{postBoardId}")
-	public ResponseEntity<Map<String, Long>> createPost(@PathVariable("postBoardId") Long postBoardId, Principal principal, @RequestBody CreatePostDTO createPostDTO){
-		Long userId = (principal != null) ? Long.valueOf(principal.getName()) : createPostDTO.getPostUserIdNumber();
+	public ResponseEntity<Map<String, Long>> createPost(@PathVariable("postBoardId") Long postBoardId, Authentication authentication, @RequestBody CreatePostDTO createPostDTO){
+		Long userId = Long.valueOf(authentication.getName());
 		postService.createPost(postBoardId, userId, createPostDTO);
 		if (createPostDTO.getPostId() == null) {
 			return ResponseEntity.internalServerError().build();
