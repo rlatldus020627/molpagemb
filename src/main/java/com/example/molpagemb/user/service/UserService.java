@@ -15,10 +15,11 @@ public interface UserService {
 	List<UserDTO> findAllUsersByUserRole(@Param("userRole") UserRole userRole);
 	UserDTO findUserByUserId(String userId);
 	UserDTO findUserByUserIdNumber(Long userIdNumber);
-	
+	List<UserRole> findRolesByUserIdNumber(Long userIdNumber);
 	String createToken(SignInUserDTO signInUserDTO);
 	
 	void createUser(CreateUserDTO createUserDTO);
+	void addUserRole(@Param("userIdNumber") Long userIdNumber, @Param("role") UserRole role);
 	
 	Optional<UserDTO> getLoggedUserId(); //로그인한 사용자 조회
 	

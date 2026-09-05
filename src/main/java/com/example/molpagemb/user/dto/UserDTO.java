@@ -1,6 +1,7 @@
 package com.example.molpagemb.user.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.example.molpagemb.common.enums.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -11,7 +12,7 @@ import lombok.Data;
 public class UserDTO {
 	private Long userIdNumber;
 	private String userId;
-	private UserRole userRole;
+	private List<UserRole> userRole;
 	
 	@JsonIgnore
 	private String userPassword;

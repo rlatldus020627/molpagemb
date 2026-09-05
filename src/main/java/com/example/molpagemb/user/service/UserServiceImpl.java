@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.molpagemb.common.enums.UserRole;
 import com.example.molpagemb.config.exception.AlreadyExistedUserException;
+import com.example.molpagemb.config.exception.UserNotFoundException;
 import com.example.molpagemb.config.jwt.JwtTokenProvider;
 import com.example.molpagemb.config.property.ErrorMessagePropertySource;
 import com.example.molpagemb.helper.SecurityHelper;
@@ -90,6 +91,24 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean existsByUserId(String userId) {
 		return userMapper.existsByUserId(userId) > 0;
+	}
+
+	@Override
+	public List<UserRole> findRolesByUserIdNumber(Long userIdNumber) {
+		return userMapper.findRolesByUserIdNumber(userIdNumber);
+	}
+
+	@Override
+	public void addUserRole(Long userIdNumber, UserRole role) {
+		//실제 존재하는 유저인지 확인
+		UserDTO user = userMapper.findUserByUserIdNumber(userIdNumber);
+		//존재하지 않는 유저라면 에러
+		if(user == null) {
+			throw new UserNotFoundException(errorMessagePropertySource.getUserNotFound());
+		}
+		//실제 존재하는 유저라면 권한 부여
+		userMapper.addUserRole(userIdNumber, role);
+		
 	}
 	
 	//TODO 로그아웃
