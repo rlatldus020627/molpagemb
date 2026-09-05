@@ -9,7 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.example.molpagemb.config.jwt.JwtFilter;
 import com.example.molpagemb.config.jwt.JwtTokenProvider;
 
 import lombok.RequiredArgsConstructor;
@@ -36,9 +38,9 @@ public class SecurityConfiguration {
 				.requestMatchers("/qwert/users/sign-up"
 									, "/qwert/users/sign-in"
 									).permitAll()
-				.requestMatchers("qwert/users/sign-out").authenticated()
+				.requestMatchers("/qwert/users/sign-out").authenticated()
 				.anyRequest().authenticated();
-		});
+		}).addFilterBefore(new JwtFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 		return http.build(); 
 	}
 
