@@ -1,6 +1,5 @@
 package com.example.molpagemb.post.controller;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.molpagemb.post.dto.CreatePostDTO;
 import com.example.molpagemb.post.dto.PostDTO;
 import com.example.molpagemb.post.service.PostService;
+import com.example.molpagemb.user.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/qwert/posts")
 public class PostController {
 	private final PostService postService;
+	private final UserService userService;
 	
 	@GetMapping("/find-all-posts")
 	public ResponseEntity<List<PostDTO>> findAllPosts(){
@@ -47,10 +48,10 @@ public class PostController {
 		return ResponseEntity.ok(postService.findPostByPostId(postId));
 	}
 	
-	@PostMapping("/post/{postBoardId}")
+	@PostMapping("/save-post/{postBoardId}")
 	public ResponseEntity<Map<String, Long>> createPost(@PathVariable("postBoardId") Long postBoardId, Authentication authentication, @RequestBody CreatePostDTO createPostDTO){
-		Long userId = Long.valueOf(authentication.getName());
-		postService.createPost(postBoardId, userId, createPostDTO);
+		Long userIdNumber = userService.findUserByUserId(authentication.getName()).getUserIdNumber();
+		postService.createPost(postBoardId, userIdNumber, createPostDTO);
 		if (createPostDTO.getPostId() == null) {
 			return ResponseEntity.internalServerError().build();
 		}

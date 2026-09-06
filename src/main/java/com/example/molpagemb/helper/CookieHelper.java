@@ -15,7 +15,7 @@ public class CookieHelper { //쿠키 생성
 	
 	public String makeJwtCookie(String jwt) {
 		return ResponseCookie
-							.from(jwtPropertySource.getCookieName())
+							.from(jwtPropertySource.getCookieName(), jwt)
 							.httpOnly(jwtPropertySource.isEnableHttpOnly())
 							.secure(jwtPropertySource.isEnableSecure())
 							.path(jwtPropertySource.getPath())

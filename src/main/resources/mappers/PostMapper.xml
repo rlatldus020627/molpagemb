@@ -30,7 +30,7 @@
   </select>
   <select id="findAllPostsByUserIdNumber" resultMap="postResultMap">
   	<include refid="postSQL"/>
-  	WHERE USER_ID_NUMBER = #{userIdNumber}
+  	WHERE POST_USER_ID_NUMBER = #{userIdNumber}
   </select>
   <select id="findPostByPostId" resultMap="postResultMap">
   	<include refid="postSQL"/>

@@ -4,7 +4,6 @@
 	<resultMap type="com.example.molpagemb.user.dto.UserDTO" id="userResultMap" >
 		<id column="USER_ID_NUMBER" property="userIdNumber"/>
 		<result column="USER_ID" property="userId"/>
-		<result column="USER_ROLE" property="userRole"/>
 		<result column="USER_PASSWORD" property="userPassword"/>
 		<result column="USER_CREATED_AT" property="userCreatedAt"/>
 		<collection property="userRole" ofType="com.example.molpagemb.common.enums.UserRole">
@@ -14,7 +13,6 @@
 	<sql id="userSQL">
 		SELECT USER_ID_NUMBER, 
 				USER_ID,
-				USER_ROLE,
 				USER_PASSWORD,
 				USER_CREATED_AT
 		FROM USERS
@@ -60,7 +58,7 @@
 	</insert>
 	<insert id = "addUserRole">
 	 INSERT INTO USER_ROLE(USER_ID_NUMBER, ROLE)
-	 VALUE (#{userIdNumber}, #{role})
+	 VALUES (#{userIdNumber}, #{role})
 	 
 	</insert>
 	

@@ -18,13 +18,13 @@ import lombok.RequiredArgsConstructor;
 public class BoardController {
 	private final BoardService boardService;
 	
-	@GetMapping("find-all-boards")
+	@GetMapping("/find-all-boards")
 	public ResponseEntity<List<BoardDTO>> findAllBoards(){
 		return ResponseEntity.ok(boardService.findAllBoards());
 	}
 	
-	@GetMapping("find-board-by-board-id")
-	public ResponseEntity<BoardDTO> finaBoardByBoardId(Long boardId){
+	@GetMapping("/find-board-by-board-id")
+	public ResponseEntity<BoardDTO> findBoardByBoardId(Long boardId){
 		return ResponseEntity.ok(boardService.findBoardByBoardId(boardId));
 	}
 	

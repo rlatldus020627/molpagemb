@@ -4,7 +4,7 @@
 	<resultMap type="com.example.molpagemb.comment.dto.CommentDTO" id="commentResultMap">
 		<result column="COMMENT_ID" property="commentId"/>
 		<result column="COMMENT_POST_ID" property="commentPostId"/>
-		<result column="COMMENT_USER_ID" property="commentUserId"/>
+		<result column="COMMENT_USER_ID_NUMBER" property="commentUserIdNumber"/>
 		<result column="COMMENT_CONTENT" property="commentContent"/>
 		<result column="COMMENT_CREATED_AT" property="commentCreatedAt"/>
 	</resultMap>
