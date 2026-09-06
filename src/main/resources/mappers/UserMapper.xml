@@ -11,11 +11,13 @@
 		</collection>
 	</resultMap>
 	<sql id="userSQL">
-		SELECT USER_ID_NUMBER, 
-				USER_ID,
-				USER_PASSWORD,
-				USER_CREATED_AT
-		FROM USERS
+		SELECT u.USER_ID_NUMBER,
+				u.USER_ID, u.USER_PASSWORD,
+				u.USER_CREATED_AT,
+				r.ROLE
+		FROM USERS u
+		LEFT OUTER JOIN USER_ROLE r
+		ON u.USER_ID_NUMBER = r.USER_ID_NUMBER
 	</sql>
 	<select id="findAllUsers" resultMap="userResultMap">
 		<include refid="userSQL" />
